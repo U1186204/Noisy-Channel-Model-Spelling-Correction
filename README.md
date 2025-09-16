@@ -1,3 +1,6 @@
+[![Python Application Test](https://github.com/U1186204/Noisy-Channel-Model-Spelling-Correction/actions/workflows/python-app.yml/badge.svg)](https://github.com/U1186204/Noisy-Channel-Model-Spelling-Correction/actions/workflows/python-app.yml)
+[![GitHub Repo](https://img.shields.io/badge/Repo-View_on_GitHub-blue.svg)](https://github.com/U1186204/Noisy-Channel-Model-Spelling-Correction)
+
 # Noisy-Channel-Model-Spelling-Correction
 
 This document outlines the design and behavior of the noisy-channel spelling corrector.
