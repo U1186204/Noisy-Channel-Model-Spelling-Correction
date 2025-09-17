@@ -35,14 +35,14 @@ Here are the key assumptions made in the implementation:
 ### Prior Model: $P(w)$
 
 * **Word Unigram Model**: The prior probability of a word, $P(w)$, is estimated from its frequency in a large corpus of English text. It is calculated as $P(w) = \frac{\text{count}(w)}{N}$, where $N$ is the total number of words in the corpus.
-* **Data Source**: A word frequency list (`word_frequencies.txt`) is used for this model. This file must be provided and contain word-count pairs.
+* **Data Source**: A word frequency list (`word_frequencies.txt`) is used for this model. This file provided and contain word count pairs for testing.
 
 ### Channel Model: $P(x|w)$
 
-The channel model estimates the probability of the typo $x$ given that the intended word was $w$. It is based on single-edit operations.
+The channel model estimates the probability of the typo $x$ given that the intended word was $w$. It is based on single edit operation.
 
 * **Single Error Assumption**: The model assumes that any given typo contains at most **one** error (one insertion, deletion, substitution, or transposition).
-* **Smoothing**: Add-1 (Laplace) smoothing is applied to all probability calculations to handle edits that were not seen in the training data. This prevents zero probabilities.
+* **Smoothing**: Add 1 (Laplace) smoothing is applied to all probability calculations to handle edits that were not seen in the training data. This prevents zero probabilities.
 * **Deletion Probability $P(x|w)$**: Calculated based on the deleted character and its preceding character.
     * Formula: `P(prefix | prefix + char) = (count(del[prefix, char]) + 1) / (count(bigram[prefix + char]) + V_bigram)`
     * The count for the bigram `prefix + char` is taken from `bigrams.csv`.
@@ -56,7 +56,7 @@ The channel model estimates the probability of the typo $x$ given that the inten
 
 ### General Assumptions
 * **Case Insensitive**: All words are converted to lowercase.
-* **Non-Word Errors Only**: The corrector only attempts to fix words that are not already present in the vocabulary (`word_frequencies.txt`). It will return any known word as-is.
+* **Non Word Errors Only**: The corrector only attempts to fix words that are not already present in the vocabulary (`word_frequencies.txt`). It will return any known word as is.
 
 ## 2. Performance Scenarios
 
@@ -84,7 +84,7 @@ Input: 'acress' -> Output: 'across' (Expected: 'across') - PASSED
 Input: 'wether' -> Output: 'weather' (Expected: 'weather') - PASSED
 --> Suite Summary: 5/5 tests passed.
 
---- 2. Scenarios Where the Model Is Expected to Fail ---
+--- 2. Scenarios Where the Model Is Expected to Fail based on its limitations---
 Input: 'peace' -> Output: 'peace' (Expected: 'peace') - FAIL(AS EXPECTED)
 Input: 'inconvient' -> Output: 'inconvient' (Expected: 'inconvient') - FAIL(AS EXPECTED)
 Input: 'zzxyy' -> Output: 'zzxyy' (Expected: 'zzxyy') - FAIL(AS EXPECTED)
@@ -92,7 +92,7 @@ Input: 'zzxyy' -> Output: 'zzxyy' (Expected: 'zzxyy') - FAIL(AS EXPECTED)
 ```
 
 ## 3. Analysis and Improvements
-The corrector's poor decisions stem directly from its modeling assumptions: it only corrects errors for non-existing words, assumes a single mistake, and excludes context.
+The corrector's poor decisions stem directly from its modeling assumptions: it only corrects errors for non existing words, assumes a single mistake, and excludes context.
 
 
 ## Potential Improvements the model does not account for
