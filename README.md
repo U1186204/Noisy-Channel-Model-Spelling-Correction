@@ -8,6 +8,9 @@ This document outlines the design and behavior of the noisy-channel spelling cor
 ## Repository Tree
 ```
 Noisy-Channel-Model-Spelling-Correction
+├── .github/
+│   └── workflows/
+│       └── python-app.yml
 ├── data/
 │   ├── additions.csv
 │   ├── bigrams.csv
@@ -15,9 +18,14 @@ Noisy-Channel-Model-Spelling-Correction
 │   ├── substitutions.csv
 │   ├── unigrams.csv
 │   └── word_frequencies.txt
-├── spelling_correction.py
-├── test.py
-└── README.md
+├── src/
+│   └── spelling_correction.py
+├── tests/
+│   └── test.py
+├── .gitignore
+├── Dockerfile
+├── README.md
+└── requirements.txt
 ```
 
 ## 1. Modeling Assumptions
