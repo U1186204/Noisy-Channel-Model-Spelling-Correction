@@ -104,5 +104,5 @@ The corrector's poor decisions stem directly from its modeling assumptions: it o
 
 
 ## Potential Improvements the model does not account for
-1.  **Use a Better Language Model (Prior)**: Replace the unigram prior $P(w)$ with a **bigram or trigram model**. This would allow the model to score candidates based on the preceding word(s) (e.g., $P(\text{actress} | \text{talented})$ vs. $P(\text{across} | \text{talented})$), which would solve the `acress` example.
+1.  **Use a Better Language Model (Prior)**: Replace the unigram prior $P(w)$ with a **bigram or trigram model**. This would allow the model to score candidates based on the preceding word(s), which would solve the `acress` example.
 2.  **Implement Real Word Error Correction**: Modify the algorithm to generate correction candidates for *all* words in a sentence, not just unknown ones. The system would then score the probability of the entire candidate sentence and choose the sentence with the highest overall score.
