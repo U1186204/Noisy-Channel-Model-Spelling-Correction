@@ -26,7 +26,7 @@ The spelling corrector is based on the noisy channel model, which evaluates cand
 
 $$ \hat{w} = \arg\max_{w \in \text{candidates}} P(w) \cdot P(x|w) $$
 
-Where $x$ is the misspelled word and $w$ is a potential correction. To avoid floating-point underflow, we work with log probabilities:
+Where $x$ is the misspelled word and $w$ is a potential correction. To avoid floating point underflow, we work with log probabilities:
 
 $$ \hat{w} = \arg\max_{w \in \text{candidates}} (\log P(w) + \log P(x|w)) $$
 
