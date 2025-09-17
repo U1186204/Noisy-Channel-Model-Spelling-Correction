@@ -10,7 +10,6 @@ class SpellingCorrector:
         """
         self.alphabet = 'abcdefghijklmnopqrstuvwxyz'
         
-        # Load raw count data
         self.unigram_counts = self._load_counts(unigrams_path, key_cols=['unigram'])
         self.bigram_counts = self._load_counts(bigrams_path, key_cols=['bigram'])
         self.sub_counts = self._load_counts(subs_path, key_cols=['original', 'substituted'])
@@ -18,11 +17,9 @@ class SpellingCorrector:
         self.add_counts = self._load_counts(adds_path, key_cols=['prefix', 'added'])
         self.vocab = self._load_counts(vocab_path, key_cols=['word'], is_vocab=True)
 
-        # Vocabulary and total word count for prior probability
         self.vocabulary = set(self.vocab.keys())
         self.total_word_count = sum(self.vocab.values())
         
-        # Total counts for smoothing
         self.total_unigram_count = sum(self.unigram_counts.values())
         self.total_bigram_count = sum(self.bigram_counts.values())
 
@@ -32,13 +29,11 @@ class SpellingCorrector:
         try:
             with open(path, 'r', encoding='utf-8') as f:
                 if is_vocab:
-                    # Handle space-delimited word frequency file
                     for line in f:
                         parts = line.strip().split()
                         if len(parts) == 2:
                             counts[parts[0]] = int(parts[1])
                 else:
-                    # Handle CSV files
                     reader = csv.DictReader(f)
                     for row in reader:
                         key = tuple(row[k] for k in key_cols)
@@ -133,11 +128,9 @@ class SpellingCorrector:
         """
         word = original_word.lower()
 
-        # If the word is correct, return it
         if word in self.vocabulary:
             return word
 
-        # Generate candidate corrections
         candidates = self._generate_candidates(word)
 
         if not candidates:
